@@ -17,7 +17,7 @@
 #
 # <src relative to root of extracted filesystem>:<dst relative to system>
 
--system/app/ims/ims.apk
+-vendor/app/ims/ims.apk:system/app/ims/ims.apk
 vendor/lib64/libimscamera_jni.so:system/app/ims/lib/arm64/libimscamera_jni.so
 vendor/lib64/libimscamera_jni.so:system/lib64/libimscamera_jni.so
 vendor/lib/libimscamera_jni.so:system/lib/libimscamera_jni.so
