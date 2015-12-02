@@ -45,17 +45,17 @@ for file in `egrep -v '(^#|^$)' $proprietary_files`; do
   # Split the file from the destination (format is "file[:destination]")
   oldifs=$IFS IFS=":" parsing_array=($file) IFS=$oldifs
 
-  FILE=${parsing_array[0]}
+  file=${parsing_array[0]}
   fileflag=""
   if [[ "$file" =~ ^- ]]; then
       fileflag="-"
-      FILE=$(echo $file | sed -e "s/^-//g")
+      file=$(echo $file | sed -e "s/^-//g")
   fi
   dest=${parsing_array[1]}
   if [ -n "$dest" ]; then
-      FILE=$dest
+    file=$dest
   fi
-  FILE=$(echo "$file" | sed 's|^system/||')
+  file=$(echo "$file" | sed 's|^system/||')
   if [ -z "$fileflag" ]; then
     echo "    $outdir/proprietary/$file:system/$file$lineend" >> $makefile
   fi
@@ -135,12 +135,12 @@ echo "PRODUCT_PACKAGES += \\" >> $vendor_makefile
 
 lineend=" \\"
 count=`ls -1 $outdir/proprietary/app/*/*.apk | wc -l`
-for APK in `ls $outdir/proprietary/app/*/*apk`; do
+for apk in `ls $outdir/proprietary/app/*/*apk`; do
   count=`expr $count - 1`
   if [ $count = "0" ]; then
     lineend=""
   fi
-    apkname=`basename $APK`
+    apkname=`basename $apk`
     apkmodulename=`echo $apkname|sed -e 's/\.apk$//gi'`
   if [[ $apkmodulename = VZWAPNLib ]]; then
     signature="PRESIGNED"
@@ -322,7 +322,7 @@ for lib in `echo "$blobllist" | grep '^-.*/lib/' | cut -d'/' -f2`;do
     (cat << EOF) >> $outdir/proprietary/lib/Android.mk
 include \$(CLEAR_VARS)
 LOCAL_MODULE := $libmodulename
-LOCAL_MODULE_OWNER := $vendor
+LOCAL_MODULE_OWNER := $VENDOR
 LOCAL_MODULE_TAGS := optional
 LOCAL_SRC_FILES := $libname
 LOCAL_MODULE_PATH := \$(TARGET_OUT_SHARED_LIBRARIES)
