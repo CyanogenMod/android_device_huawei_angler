@@ -120,7 +120,7 @@ function extract(){
   local factory_md5=$2
   local proprietary_files=$3
   local outbase=$4
-  local tmpdir="$ANDROID_BUILD_TOP/.tmp/factory/$device/$build"
+  local tmpdir="/tmp/extract-files/$device/$build"
 
   mkdir -p $4
   mkdir -p $tmpdir
